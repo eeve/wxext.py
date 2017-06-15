@@ -2,7 +2,7 @@
 import crython
 import datetime
 from wxpy import *
-from extend import pm2_5
+from extend import (pm2_5, weather)
 
 # * * * * * * *
 # | | | | | | |
@@ -17,8 +17,12 @@ from extend import pm2_5
 global bot
 
 @crython.job(expr='0 */30 * * * * *')
-def interval():
+def pm2_5():
   bot.self.send(pm2_5.getPM2_5Msg())
+
+@crython.job(expr='0 0 8 * * * *')
+def weather():
+  bot.self.send(weather.getWeatherMsg())
 
 
 if __name__ == '__main__':
